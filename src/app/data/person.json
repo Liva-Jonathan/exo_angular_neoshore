@@ -3,27 +3,27 @@
     {
       "id": "1",
       "name": "Jean Koto",
-      "photo": "40"
+      "photo": "1.jpeg"
     },
     {
       "id": "2",
       "name": "Pierre Patrick",
-      "photo": "60"
+      "photo": "2.jpg"
     },
     {
       "id": "3",
       "name": "Jean Aimé",
-      "photo": "40"
+      "photo": "3.jpeg"
     },
     {
       "id": "4",
       "name": "Fabien Boyer",
-      "photo": "40"
+      "photo": "4.jpg"
     },
     {
       "id": "5",
       "name": "Marco Julien",
-      "photo": "60"
+      "photo": "5.jpg"
     }
   ]
 }

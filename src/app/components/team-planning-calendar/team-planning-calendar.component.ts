@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CalendarOptions} from "@fullcalendar/core";
+import {CalendarOptions, EventMountArg} from "@fullcalendar/core";
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin from '@fullcalendar/interaction';
 import {ActivatedRoute} from "@angular/router";
@@ -8,7 +8,6 @@ import {Person} from "../../models/person";
 import {Event} from "../../models/Event";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogEventComponent} from "../dialog-event/dialog-event.component";
-import {EventService} from "../../services/event.service";
 import {EventImpl} from "@fullcalendar/core/internal";
 
 @Component({
@@ -31,17 +30,21 @@ export class TeamPlanningCalendarComponent implements OnInit {
     themeSystem: 'flatly',
     initialView: 'resourceTimelineDay',
     editable: true,
-    aspectRatio: 5,
+    aspectRatio: 3.8,
     resourceAreaColumns: [
-      {
-        field: 'name',
-        headerContent: 'Nom'
-      },
       {
         field: 'photo',
         headerContent: 'Photo'
+      },
+      {
+        field: 'name',
+        headerContent: 'Nom'
       }
     ],
+    resourceLabelContent: (arg) => {
+      console.log('arg', arg);
+      return { html: "<img src='./assets/photo/" + arg.resource._resource.extendedProps['photo'] + "' width='50' height='40'>" };
+    },
     customButtons: {
       saveButton: {
         text: 'Sauvegarder les changements',
@@ -64,10 +67,7 @@ export class TeamPlanningCalendarComponent implements OnInit {
       this.updateEvent(info.event);
     },
     eventDidMount: (info) => {
-      const event: Event | undefined = this.calendarEvents.find(e => e.title === info.event._def.title);
-      if(event?.description) {
-        info.el.title = event?.description;
-      }
+      this.deleteEvent(info);
     }
   };
 
@@ -147,6 +147,13 @@ export class TeamPlanningCalendarComponent implements OnInit {
   updateEvent(eventImpl: EventImpl) {
     const event: Event | undefined = this.calendarEvents.find(e => e.title === eventImpl._def.title);
     this.openDialogEvent(event);
+  }
+
+  deleteEvent(info: EventMountArg) {
+    const event: Event | undefined = this.calendarEvents.find(e => e.title === info.event._def.title);
+    if(event?.description) {
+      info.el.title = event?.description;
+    }
   }
 
   get calendarEvents(): Event[] {
