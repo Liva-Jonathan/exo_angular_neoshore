@@ -42,7 +42,6 @@ export class TeamPlanningCalendarComponent implements OnInit {
       }
     ],
     resourceLabelContent: (arg) => {
-      console.log('arg', arg);
       return { html: "<img src='./assets/photo/" + arg.resource._resource.extendedProps['photo'] + "' width='50' height='40'>" };
     },
     customButtons: {

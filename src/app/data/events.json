@@ -3,20 +3,56 @@
     {
       "resourceId": "1",
       "allDay": false,
-      "title": "event 3",
-      "color": "green",
+      "title": "Design du site web",
+      "color": "#5cb85c",
       "start": "2024-04-15T12:00:00Z",
-      "end": "2024-04-16T06:00:00Z",
-      "description": "description event 3"
+      "end": "2024-04-15T15:00:00Z",
+      "description": "Faire le design du site web de notre nouveau produit"
+    },
+    {
+      "resourceId": "3",
+      "allDay": false,
+      "title": "Conception BD",
+      "color": "#0275d8",
+      "start": "2024-04-15T08:00:00Z",
+      "end": "2024-04-15T11:00:00Z",
+      "description": "Faire la conception de la base de données Oracle"
     },
     {
       "resourceId": "2",
-      "allDay": true,
-      "title": "event 1",
-      "color": "blue",
-      "start": "2024-04-15",
-      "end": "2024-04-16",
-      "description": "description event 1"
+      "allDay": false,
+      "title": "Maquette",
+      "color": "#d9534f",
+      "start": "2024-04-16T09:00:00Z",
+      "end": "2024-04-16T11:30:00Z",
+      "description": "Faire la maquette Figma"
+    },
+    {
+      "resourceId": "4",
+      "allDay": false,
+      "title": "Gestion de projet",
+      "color": "#f0ad4e",
+      "start": "2024-04-16T14:00:00Z",
+      "end": "2024-04-16T19:00:00Z",
+      "description": "Suivi du projet de site web"
+    },
+    {
+      "resourceId": "2",
+      "allDay": false,
+      "title": "Démo",
+      "color": "#5cb85c",
+      "start": "2024-04-17T08:00:00Z",
+      "end": "2024-04-17T12:30:00Z",
+      "description": "Démonstration de l'application"
+    },
+    {
+      "resourceId": "5",
+      "allDay": false,
+      "title": "Réunion",
+      "color": "#f0ad4e",
+      "start": "2024-04-17T11:00:00Z",
+      "end": "2024-04-17T15:00:00Z",
+      "description": "Réunion avec le client"
     }
   ]
 }
