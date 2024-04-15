@@ -9,6 +9,7 @@ import {Event} from "../../models/Event";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogEventComponent} from "../dialog-event/dialog-event.component";
 import {EventImpl} from "@fullcalendar/core/internal";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-team-planning-calendar',
@@ -86,6 +87,13 @@ export class TeamPlanningCalendarComponent implements OnInit {
       "Les missions de l'équipe: ",
       this.personService.getPersonsEvents(this.calendarOptions.resources as Person[], this.calendarOptions.events as Event[])
     );
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Planning enregistré (Affiché dans la console)",
+      showConfirmButton: true,
+    });
   }
 
   openDialogEvent(event: Event | undefined) {
