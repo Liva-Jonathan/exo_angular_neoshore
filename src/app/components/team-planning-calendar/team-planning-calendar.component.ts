@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {CalendarOptions} from "@fullcalendar/core";
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import interactionPlugin from '@fullcalendar/interaction';
-import {PersonService} from "../../services/person.service";
-import {EventService} from "../../services/event.service";
 import {ActivatedRoute} from "@angular/router";
+import {PersonService} from "../../services/person.service";
+import {Person} from "../../models/person";
+import {Event} from "../../models/Event";
 
 @Component({
   selector: 'app-team-planning-calendar',
@@ -17,9 +18,9 @@ export class TeamPlanningCalendarComponent implements OnInit {
     schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
     plugins: [ resourceTimelinePlugin, interactionPlugin ],
     headerToolbar: {
-      left: 'today prev,next',
+      left: 'today prev,next saveButton',
       center: 'title',
-      right: 'resourceTimelineDay,resourceTimelineWeek'
+      right: 'newEvent resourceTimelineDay,resourceTimelineWeek'
     },
     locale: 'fr',
     timeZone: 'UTC',
@@ -36,16 +37,39 @@ export class TeamPlanningCalendarComponent implements OnInit {
         field: 'photo',
         headerContent: 'Photo'
       }
-    ]
+    ],
+    customButtons: {
+      saveButton: {
+        text: 'Sauvegarder les changements',
+        click: () => {
+          this.saveCalendar();
+        }
+      },
+
+      newEvent: {
+        text: 'Ajouter une mission',
+        click: () => {
+
+        }
+      }
+    }
   };
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+              private personService: PersonService) {
     const {persons, events} = this.route.snapshot.data;
     this.calendarOptions.resources = persons;
     this.calendarOptions.events = events;
   }
 
   ngOnInit(): void {
+  }
+
+  saveCalendar() {
+    console.log(
+      "Les missions de l'équipe: ",
+      this.personService.getPersonsEvents(this.calendarOptions.resources as Person[], this.calendarOptions.events as Event[])
+    );
   }
 
 }
