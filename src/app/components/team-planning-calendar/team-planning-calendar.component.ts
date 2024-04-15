@@ -62,12 +62,17 @@ export class TeamPlanningCalendarComponent implements OnInit {
     },
     eventClick: (info) => {
       this.updateEvent(info.event);
+    },
+    eventDidMount: (info) => {
+      const event: Event | undefined = this.calendarEvents.find(e => e.title === info.event._def.title);
+      if(event?.description) {
+        info.el.title = event?.description;
+      }
     }
   };
 
   constructor(private route: ActivatedRoute,
               private personService: PersonService,
-              private eventService: EventService,
               public dialog: MatDialog) {
     const {persons, events} = this.route.snapshot.data;
     this.calendarOptions.resources = persons;
