@@ -1,0 +1,18 @@
+{
+  "events": [
+    {
+      "resourceId": "1",
+      "allDay": false,
+      "title": "event 3",
+      "start": "2024-04-15T12:00:00Z",
+      "end": "2024-04-16T06:00:00Z"
+    },
+    {
+      "resourceId": "2",
+      "allDay": true,
+      "title": "event 1",
+      "start": "2024-04-15",
+      "end": "2024-04-16"
+    }
+  ]
+}
