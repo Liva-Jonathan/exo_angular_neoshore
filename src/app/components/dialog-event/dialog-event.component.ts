@@ -10,6 +10,7 @@ import {Person} from "../../models/person";
 export class DialogEventComponent implements OnInit {
 
   title = "";
+  isNew = true;
 
   event =  {
     title: "",
@@ -24,9 +25,10 @@ export class DialogEventComponent implements OnInit {
     this.persons = data.persons;
     if(data.event) {
       this.event = data.event;
+      this.isNew = false;
     }
 
-    this.title = data.event ? "Modification de la mission" : "Nouvelle mission";
+    this.title = this.isNew ? "Nouvelle mission" : "Modification de la mission";
   }
 
   ngOnInit(): void {

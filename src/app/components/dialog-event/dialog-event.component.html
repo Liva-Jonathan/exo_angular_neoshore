@@ -4,16 +4,16 @@
 <div mat-dialog-content>
   <p>Titre</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="event.title">
+    <input matInput [(ngModel)]="event.title" required>
   </mat-form-field>
   <p>Description</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="event.description">
+    <input matInput [(ngModel)]="event.description" required>
   </mat-form-field>
   <p>Couleur</p>
   <mat-form-field>
     <mat-label>Choisier une couleur</mat-label>
-    <mat-select [(ngModel)]="event.color">
+    <mat-select [(ngModel)]="event.color" required>
       <mat-option value="blue">Bleu</mat-option>
       <mat-option value="red">Rouge</mat-option>
       <mat-option value="green">Vert</mat-option>
@@ -23,12 +23,15 @@
   <p>Personne</p>
   <mat-form-field>
     <mat-label>Choisier une personne</mat-label>
-    <mat-select [(ngModel)]="event.resourceId">
+    <mat-select [(ngModel)]="event.resourceId" required>
       <mat-option *ngFor="let person of persons" value="{{person.id}}">{{ person.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Fermer</button>
-  <button mat-button [mat-dialog-close]="event">Ok</button>
+  <div>
+    <button mat-stroked-button mat-dialog-close>Fermer</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="event">Sauvegarder</button>
+  </div>
+  <button *ngIf="!isNew" mat-flat-button color="warn" [mat-dialog-close]="undefined">Supprimer</button>
 </div>

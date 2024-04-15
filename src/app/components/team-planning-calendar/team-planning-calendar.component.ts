@@ -119,6 +119,8 @@ export class TeamPlanningCalendarComponent implements OnInit {
           });
           this.calendarOptions.events = newTabEvents;
         }
+      } else if (resultEvent === undefined && event) {
+        this.calendarOptions.events = this.calendarEvents.filter(e => e.title !== event.title);
       }
     });
   }
