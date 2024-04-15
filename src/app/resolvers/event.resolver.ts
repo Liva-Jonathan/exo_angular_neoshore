@@ -6,6 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {EventService} from "../services/event.service";
+import {Event} from "../models/Event.js";
 
 @Injectable({
   providedIn: 'root'

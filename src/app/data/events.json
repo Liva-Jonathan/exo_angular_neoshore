@@ -5,14 +5,16 @@
       "allDay": false,
       "title": "event 3",
       "start": "2024-04-15T12:00:00Z",
-      "end": "2024-04-16T06:00:00Z"
+      "end": "2024-04-16T06:00:00Z",
+      "description": "description event 3"
     },
     {
       "resourceId": "2",
       "allDay": true,
       "title": "event 1",
       "start": "2024-04-15",
-      "end": "2024-04-16"
+      "end": "2024-04-16",
+      "description": "description event 1"
     }
   ]
 }

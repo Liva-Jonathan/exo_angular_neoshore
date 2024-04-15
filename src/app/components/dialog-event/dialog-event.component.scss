@@ -1,0 +1,10 @@
+:host(app-dialog-event) {
+  .title {
+    display: flex;
+    justify-content: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
