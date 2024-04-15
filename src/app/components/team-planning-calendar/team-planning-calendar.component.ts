@@ -53,12 +53,15 @@ export class TeamPlanningCalendarComponent implements OnInit {
       newEvent: {
         text: 'Ajouter une mission',
         click: () => {
-          this.openDialogEvent();
+          this.openDialogEvent(undefined);
         }
       }
     },
     eventChange: (change) => {
-      this.updateEvent(change.oldEvent, change.event);
+      this.updateDraggedEvent(change.oldEvent, change.event);
+    },
+    eventClick: (info) => {
+      this.updateEvent(info.event);
     }
   };
 
@@ -81,35 +84,47 @@ export class TeamPlanningCalendarComponent implements OnInit {
     );
   }
 
-  openDialogEvent() {
+  openDialogEvent(event: Event | undefined) {
     const dialogRef = this.dialog.open(DialogEventComponent, {
       width: '30%',
       height: '90%',
       data: {
-        persons: this.calendarOptions.resources
+        persons: this.calendarOptions.resources,
+        event: event
       }
     });
 
     dialogRef.afterClosed().subscribe(resultEvent => {
       if(resultEvent) {
+        if (!event) { // New event
 
-        /* setting event dates */
-        const today = new Date();
-        resultEvent.start = today.toISOString().slice(0, 19) + "Z";
-        today.setHours(today.getHours() + 2);
-        resultEvent.end = today.toISOString().slice(0, 19) + "Z";
-        resultEvent.allDay = false;
+          /* setting event dates */
+          const today = new Date();
+          resultEvent.start = today.toISOString().slice(0, 19) + "Z";
+          today.setHours(today.getHours() + 2);
+          resultEvent.end = today.toISOString().slice(0, 19) + "Z";
+          resultEvent.allDay = false;
 
-        /* add new events */
-        const newTabEvents =  [...(this.calendarOptions.events as Event[])];
-        newTabEvents.push(resultEvent);
-        this.calendarOptions.events = newTabEvents;
+          /* add new events */
+          const newTabEvents = [...this.calendarEvents];
+          newTabEvents.push(resultEvent);
+          this.calendarOptions.events = newTabEvents;
+
+        } else { // Modifying event
+          const newTabEvents = [...this.calendarEvents];
+          newTabEvents.forEach(e => {
+            if(e.title === event.title) {
+              e = resultEvent;
+            }
+          });
+          this.calendarOptions.events = newTabEvents;
+        }
       }
     });
   }
 
-  updateEvent(oldEvent: EventImpl, newEvent: EventImpl) {
-    const tabEvents = [...(this.calendarOptions.events as Event[])];
+  updateDraggedEvent(oldEvent: EventImpl, newEvent: EventImpl) {
+    const tabEvents = [...this.calendarEvents];
     for (let i = 0; i < tabEvents.length; i++) {
       if (tabEvents[i].title === oldEvent._def.title) {
         // @ts-ignore
@@ -120,6 +135,15 @@ export class TeamPlanningCalendarComponent implements OnInit {
       }
     }
     this.calendarOptions.events = tabEvents;
+  }
+
+  updateEvent(eventImpl: EventImpl) {
+    const event: Event | undefined = this.calendarEvents.find(e => e.title === eventImpl._def.title);
+    this.openDialogEvent(event);
+  }
+
+  get calendarEvents(): Event[] {
+    return (this.calendarOptions.events as Event[]);
   }
 
 }

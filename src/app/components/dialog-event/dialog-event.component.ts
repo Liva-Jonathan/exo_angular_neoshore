@@ -9,6 +9,8 @@ import {Person} from "../../models/person";
 })
 export class DialogEventComponent implements OnInit {
 
+  title = "";
+
   event =  {
     title: "",
     description: "",
@@ -20,6 +22,11 @@ export class DialogEventComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.persons = data.persons;
+    if(data.event) {
+      this.event = data.event;
+    }
+
+    this.title = data.event ? "Modification de la mission" : "Nouvelle mission";
   }
 
   ngOnInit(): void {
